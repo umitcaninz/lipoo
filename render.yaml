@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: lipozom-predict
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app
+    plan: free
+    healthCheckPath: /
+    healthCheckTimeout: 100
+    buildFilter:
+      paths:
+        - requirements.txt
+        - "*.py"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0 
